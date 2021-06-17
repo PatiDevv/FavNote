@@ -6,6 +6,9 @@ import { theme } from "../../theme/mainTheme";
 import Heading from "../../components/atoms/Heading/Heading";
 import Paragraph from "../../components/atoms/Paragraph/Paragraph";
 import Input from "../../components/atoms/Input/Input";
+import ButtonIcon from "../../components/atoms/ButtonIcon/ButtonIcon";
+
+import ImageAssets from "./../../constants/ImageAssets";
 
 const Root = () => (
   <div>
@@ -20,6 +23,8 @@ const Root = () => (
       </Paragraph>
       <Input placeholder="Trzymaj"></Input>
       <Input search placeholder="Trzymaj"></Input>
+      <ButtonIcon icon={ImageAssets.bulb}></ButtonIcon>
+      <ButtonIcon icon={ImageAssets.plus} active></ButtonIcon>
 
       <Button>close/save</Button>
       <Button secondary>Remove</Button>
