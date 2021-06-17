@@ -7,7 +7,7 @@ import Heading from "../../components/atoms/Heading/Heading";
 import Paragraph from "../../components/atoms/Paragraph/Paragraph";
 import Input from "../../components/atoms/Input/Input";
 import ButtonIcon from "../../components/atoms/ButtonIcon/ButtonIcon";
-
+import Card from "../../components/molecules/Card/Card";
 import ImageAssets from "./../../constants/ImageAssets";
 
 const Root = () => (
@@ -28,6 +28,8 @@ const Root = () => (
 
       <Button>close/save</Button>
       <Button secondary>Remove</Button>
+
+      <Card></Card>
     </ThemeProvider>
   </div>
 );
