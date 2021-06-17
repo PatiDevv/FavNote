@@ -30,6 +30,8 @@ const Root = () => (
       <Button secondary>Remove</Button>
 
       <Card></Card>
+      <Card cardType="article"></Card>
+      <Card cardType="twitter"></Card>
     </ThemeProvider>
   </div>
 );

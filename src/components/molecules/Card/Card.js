@@ -3,6 +3,7 @@ import React from "react";
 import Heading from "../../atoms/Heading/Heading";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import Button from "../../atoms/Button/Button";
+import PropTypes from "prop-types";
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -17,7 +18,7 @@ const StyledWrapper = styled.div`
 
 const InnerWrapper = styled.div`
   padding: 17px 30px;
-  background-color: ${({ yellow, theme }) => (yellow ? theme.primary : "white")};
+  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : "white")};
 
   ${({ flex }) =>
     flex &&
@@ -38,10 +39,10 @@ const HeadingStyle = styled(Heading)`
   margin: 0 0 5px;
 `;
 
-const Card = () => (
+const Card = ({ cardType }) => (
   <>
     <StyledWrapper>
-      <InnerWrapper yellow>
+      <InnerWrapper activeColor={cardType}>
         <HeadingStyle>Nagłówek</HeadingStyle>
         <DateInfo>6 dni temu</DateInfo>
       </InnerWrapper>
@@ -53,5 +54,13 @@ const Card = () => (
     </StyledWrapper>
   </>
 );
+
+Card.propTypes = {
+  cardType: PropTypes.oneOf(["note", "twitter", "article"]),
+};
+
+Card.defaultProps = {
+  cardType: "note",
+};
 
 export default Card;
