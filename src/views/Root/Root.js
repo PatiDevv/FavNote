@@ -19,6 +19,7 @@ const Root = () => (
         eloquentiam nec, per ea aperiam accusam efficiantur. Vis harum recusabo tractatos ad.
       </Paragraph>
       <Input placeholder="Trzymaj"></Input>
+      <Input search placeholder="Trzymaj"></Input>
 
       <Button>close/save</Button>
       <Button secondary>Remove</Button>
