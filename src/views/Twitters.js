@@ -1,5 +1,6 @@
 import React from "react";
+import UserPageTemplate from "../components/templates/UserPageTemplate";
 
-const Twitters = () => <h1>Twitters view</h1>;
+const Twitters = () => <UserPageTemplate pageType="twitter"></UserPageTemplate>;
 
 export default Twitters;
