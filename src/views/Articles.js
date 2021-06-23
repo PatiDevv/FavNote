@@ -2,7 +2,7 @@ import React from "react";
 import GridTemplate from "../components/templates/GridTemplate";
 import Card from "../components/molecules/Card/Card";
 
-const articles = [
+export const articles = [
   {
     id: 1,
     title: "React on my mind",

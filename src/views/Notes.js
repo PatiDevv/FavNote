@@ -2,7 +2,7 @@ import React from "react";
 import GridTemplate from "../components/templates/GridTemplate";
 import Card from "../components/molecules/Card/Card";
 
-const notes = [
+export const notes = [
   {
     id: 1,
     title: "Wake me up when Vue ends",

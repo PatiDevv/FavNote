@@ -78,7 +78,7 @@ class Card extends Component {
   handleCardClik = () => this.setState({ redirect: true });
 
   render() {
-    const { id, cardType, title, created, twitterName, articleUrl, content } = this.props;
+    const { id, cardType, title, created, twitterPhoto, articleUrl, content } = this.props;
 
     if (this.state.redirect) {
       return <Redirect to={`${cardType}/${id}`} />;
@@ -90,7 +90,7 @@ class Card extends Component {
           <StyledHeading>{title}</StyledHeading>
           <DateInfo>{created}</DateInfo>
 
-          {cardType === "twitters" && <StyledAvatar src={twitterName} />}
+          {cardType === "twitters" && <StyledAvatar src={twitterPhoto} />}
           {cardType === "articles" && <StyledLinkButton href={articleUrl} />}
         </InnerWrapper>
 
@@ -107,14 +107,14 @@ Card.propTypes = {
   cardType: PropTypes.oneOf(["notes", "twitters", "articles"]),
   title: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
-  twitterName: PropTypes.string,
+  twitterPhoto: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
 };
 
 Card.defaultProps = {
   cardType: "notes",
-  twitterName: null,
+  twitterPhoto: null,
   articleUrl: null,
 };
 

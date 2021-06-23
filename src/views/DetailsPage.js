@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DetailsTemplate from "../../src/components/templates/DetailsTemplate";
 import { routes } from "../../src/routes/index";
+import CardDetails from "../../src/components/molecules/Card/CardDetails";
 
 class DetailsPage extends Component {
   state = {
@@ -25,7 +26,7 @@ class DetailsPage extends Component {
     const { match } = this.state;
     return (
       <DetailsTemplate pageType={this.state.pageType}>
-        <p>{this.state.pageType}</p>
+        <CardDetails></CardDetails>
       </DetailsTemplate>
     );
   }
