@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { theme } from "../../../theme/mainTheme";
 import magnifierIcon from "../../../assets/icons/magnifier.svg";
 
 const Input = styled.input`
