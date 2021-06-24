@@ -51,7 +51,7 @@ export default function CardDetails() {
 
   const [pageType, id] = location.pathname.substr(1).split("/");
 
-  const cardItem = useSelector((s) => s)[pageType].find((item) => item.id == id);
+  const cardItem = useSelector((s) => s)[pageType].find((item) => item.id === id);
   const { title, created, twitterPhoto, articleUrl, content, twitterLink } = cardItem;
   console.log(articleUrl);
   return (

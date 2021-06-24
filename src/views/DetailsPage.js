@@ -19,13 +19,15 @@ class DetailsPage extends Component {
       case routes.article:
         this.setState({ pageType: "articles" });
         break;
+      default:
+        console.log("Something went wrong with matching paths");
     }
   }
 
   render() {
-    const { match } = this.state;
+    const { pageType } = this.state;
     return (
-      <DetailsTemplate pageType={this.state.pageType}>
+      <DetailsTemplate pageType={pageType}>
         <CardDetails></CardDetails>
       </DetailsTemplate>
     );

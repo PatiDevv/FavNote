@@ -144,9 +144,9 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType].filter((item) => item.id !== action.payload.id)],
       };
+    default:
+      return state;
   }
-
-  return state;
 };
 
 export default rootReducer;
