@@ -5,19 +5,19 @@ import CardDetails from "../../src/components/molecules/Card/CardDetails";
 
 class DetailsPage extends Component {
   state = {
-    pageType: "note",
+    pageContext: "note",
   };
 
   componentDidMount() {
     switch (this.props.match.path) {
       case routes.twitter:
-        this.setState({ pageType: "twitters" });
+        this.setState({ pageContext: "twitters" });
         break;
       case routes.note:
-        this.setState({ pageType: "notes" });
+        this.setState({ pageContext: "notes" });
         break;
       case routes.article:
-        this.setState({ pageType: "articles" });
+        this.setState({ pageContext: "articles" });
         break;
       default:
         console.log("Something went wrong with matching paths");
@@ -25,9 +25,9 @@ class DetailsPage extends Component {
   }
 
   render() {
-    const { pageType } = this.state;
+    const { pageContext } = this.state;
     return (
-      <DetailsTemplate pageType={pageType}>
+      <DetailsTemplate pageContext={pageContext}>
         <CardDetails></CardDetails>
       </DetailsTemplate>
     );

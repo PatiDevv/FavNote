@@ -5,6 +5,7 @@ import ButtonIcon from "../../atoms/ButtonIcon/ButtonIcon";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
+import withContext from "../../../hoc/withContext";
 
 const StyledWrapper = styled.nav`
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.note)};
@@ -41,8 +42,8 @@ const StyledLogoutButton = styled(ButtonIcon)`
   margin-top: auto;
 `;
 
-const Sidebar = ({ pageType }) => (
-  <StyledWrapper activeColor={pageType}>
+const Sidebar = ({ pageContext }) => (
+  <StyledWrapper activeColor={pageContext}>
     <StyledLogoLink to="/" />
     <StyledLinksList>
       <li>
@@ -60,7 +61,7 @@ const Sidebar = ({ pageType }) => (
 );
 
 Sidebar.propTypes = {
-  pageType: PropTypes.oneOf(["notes", "twitters", "articles"]),
+  PageContext: PropTypes.oneOf(["notes", "twitters", "articles"]),
 };
 
-export default Sidebar;
+export default withContext(Sidebar);

@@ -20,12 +20,12 @@ const StyledButton = styled(Button)`
 
 const StyledContent = styled.div``;
 
-const DetailsTemplate = ({ children, pageType }) => (
-  <UserPageTemplate pageType={pageType}>
+const DetailsTemplate = ({ children, pageContext }) => (
+  <UserPageTemplate pageContext={pageContext}>
     <StyledWrapper>
       <StyledContent>{children}</StyledContent>
       <StyledButton>Usuń notatkę</StyledButton>
-      <StyledButton activeColor={pageType}>
+      <StyledButton activeColor={pageContext}>
         <StyledLink to="/"> close/SAVE</StyledLink>
       </StyledButton>
     </StyledWrapper>

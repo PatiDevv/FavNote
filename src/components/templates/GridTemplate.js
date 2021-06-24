@@ -5,6 +5,7 @@ import Input from "../atoms/Input/Input";
 import Heading from "../atoms/Heading/Heading";
 import Paragraph from "../atoms/Paragraph/Paragraph";
 import UserPageTemplate from "../../components/templates/UserPageTemplate";
+import withContext from "../../hoc/withContext";
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -29,20 +30,20 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const GridTemplate = ({ children, pageType }) => (
-  <UserPageTemplate pageType={pageType}>
+const GridTemplate = ({ children, pageContext }) => (
+  <UserPageTemplate>
     <StyledWrapper>
       <StyledPageHeader>
         <Input search placeholder="search"></Input>
         <StyledHeading big as="h1">
-          {pageType === "notes" && "Notatki"}
-          {pageType === "articles" && "Artykuły"}
-          {pageType === "twitters" && "Twitters"}
+          {pageContext === "notes" && "Notatki"}
+          {pageContext === "articles" && "Artykuły"}
+          {pageContext === "twitters" && "Twitters"}
         </StyledHeading>
         <StyledParagraph>
-          6 {pageType === "notes" && "notatek"}
-          {pageType === "articles" && "artykułów"}
-          {pageType === "twitters" && "twittów"}
+          6 {pageContext === "notes" && "notatek"}
+          {pageContext === "articles" && "artykułów"}
+          {pageContext === "twitters" && "twittów"}
         </StyledParagraph>
       </StyledPageHeader>
       <StyledGrid>{children}</StyledGrid>
@@ -52,11 +53,11 @@ const GridTemplate = ({ children, pageType }) => (
 
 GridTemplate.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  pageType: PropTypes.oneOf(["notes", "twitters", "articles"]),
+  PageContext: PropTypes.oneOf(["notes", "twitters", "articles"]),
 };
 
 GridTemplate.defaultProps = {
-  pageType: "notes",
+  PageContext: "notes",
 };
 
-export default GridTemplate;
+export default withContext(GridTemplate);

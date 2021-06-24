@@ -4,7 +4,7 @@ import GridTemplate from "../components/templates/GridTemplate";
 import Card from "../components/molecules/Card/Card";
 
 const Twitters = ({ twitters }) => (
-  <GridTemplate pageType="twitters">
+  <GridTemplate pageContext="twitters">
     {twitters.map((item) => (
       <Card id={item.id} cardType="twitters" title={item.title} created={item.created} twitterPhoto={item.twitterPhoto} content={item.content} key={item.id} />
     ))}

@@ -49,9 +49,9 @@ const StyledParagraph = styled(Paragraph)`
 export default function CardDetails() {
   const location = useLocation();
 
-  const [pageType, id] = location.pathname.substr(1).split("/");
+  const [pageContext, id] = location.pathname.substr(1).split("/");
 
-  const cardItem = useSelector((s) => s)[pageType].find((item) => item.id === id);
+  const cardItem = useSelector((s) => s)[pageContext].find((item) => item.id === id);
   const { title, created, twitterPhoto, articleUrl, content, twitterLink } = cardItem;
   console.log(articleUrl);
   return (
@@ -59,14 +59,14 @@ export default function CardDetails() {
       <StyledHeading>{title}</StyledHeading>
       <StyledDate>Utworzono: {created}</StyledDate>
 
-      {pageType === "twitters" && <StyledAvatar src={twitterPhoto} />}
+      {pageContext === "twitters" && <StyledAvatar src={twitterPhoto} />}
       <StyledParagraph>{content}</StyledParagraph>
-      {pageType === "articles" && (
+      {pageContext === "articles" && (
         <StyledA href={articleUrl} target="_blank">
           Przejdź do artykułu
         </StyledA>
       )}
-      {pageType === "twitters" && (
+      {pageContext === "twitters" && (
         <StyledA href={twitterLink} target="_blank">
           Przejdź do twitta
         </StyledA>
