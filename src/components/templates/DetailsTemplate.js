@@ -11,6 +11,7 @@ const StyledWrapper = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.black};
+  padding: 15px 58px;
 `;
 
 const StyledButton = styled(Button)`
@@ -26,7 +27,7 @@ const DetailsTemplate = ({ children, pageContext }) => (
       <StyledContent>{children}</StyledContent>
       <StyledButton>Usuń notatkę</StyledButton>
       <StyledButton activeColor={pageContext}>
-        <StyledLink to="/"> close/SAVE</StyledLink>
+        <StyledLink to={`/${pageContext}`}> close/SAVE</StyledLink>
       </StyledButton>
     </StyledWrapper>
   </UserPageTemplate>
