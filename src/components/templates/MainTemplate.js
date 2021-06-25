@@ -7,7 +7,7 @@ import { theme } from "../../theme/mainTheme";
 import PageContext from "../../context/index";
 
 class MainTemplate extends Component {
-  state = { pageContext: "notes" };
+  state = { pageType: "notes" };
 
   componentDidMount() {
     this.setCurrentPage();
@@ -18,26 +18,26 @@ class MainTemplate extends Component {
   }
 
   setCurrentPage = (prevState = " ") => {
-    const pageContexts = ["twitters", "articles", "notes"];
+    const pageTypes = ["twitters", "articles", "notes"];
     const {
       location: { pathname },
     } = this.props;
 
-    const [currentPage] = pageContexts.filter((page) => pathname.includes(page));
+    const [currentPage] = pageTypes.filter((page) => pathname.includes(page));
 
-    if (prevState.pageContext !== currentPage) {
-      this.setState({ pageContext: currentPage });
+    if (prevState.pageType !== currentPage) {
+      this.setState({ pageType: currentPage });
       console.log(this.state);
     }
   };
 
   render() {
     const { children } = this.props;
-    const { pageContext } = this.state;
+    const { pageType } = this.state;
 
     return (
       <>
-        <PageContext.Provider value={pageContext}>
+        <PageContext.Provider value={pageType}>
           <GlobalStyle />
           <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </PageContext.Provider>

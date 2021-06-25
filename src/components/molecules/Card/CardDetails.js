@@ -4,6 +4,7 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 import Heading from "../../atoms/Heading/Heading";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import withContext from "../../../hoc/withContext";
 
 const StyledWrapper = styled.div`
   width: 30vw;
@@ -46,14 +47,21 @@ const StyledParagraph = styled(Paragraph)`
   margin: 25px 0;
 `;
 
-export default function CardDetails() {
+const CardDetails = () => {
   const location = useLocation();
 
   const [pageContext, id] = location.pathname.substr(1).split("/");
 
-  const cardItem = useSelector((s) => s)[pageContext].find((item) => item.id === id);
+  const store = useSelector((s) => s);
+
+  const cardItem = store[pageContext].find((item) => item.id === Number(id)); // albo parseInt()
+  //console.log("carditem: ", cardItem, " cardItem2: ", cardItem2);
+  //console.log("id carditem2-u: ", cardItem2.id, " id z location: ", id);
+  //console.log("id == cardItem2.id : ", id == cardItem2.id);
+  //console.log("id === cardItem2.id : ", id === cardItem2.id);
+
   const { title, created, twitterPhoto, articleUrl, content, twitterLink } = cardItem;
-  console.log(articleUrl);
+
   return (
     <StyledWrapper>
       <StyledHeading>{title}</StyledHeading>
@@ -73,4 +81,5 @@ export default function CardDetails() {
       )}
     </StyledWrapper>
   );
-}
+};
+export default withContext(CardDetails);
