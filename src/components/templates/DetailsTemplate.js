@@ -1,36 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import UserPageTemplate from "./UserPageTemplate";
 import styled from "styled-components";
-import Button from "../../components/atoms/Button/Button";
 
 const StyledWrapper = styled.div`
   padding: 0px 150px 25px 100px;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${({ theme }) => theme.black};
-  padding: 15px 58px;
-`;
-
-const StyledButton = styled(Button)`
-  margin-top: 50px;
-  margin-right: 20px;
-`;
-
 const StyledContent = styled.div``;
 
-const DetailsTemplate = ({ children, pageContext }) => (
-  <UserPageTemplate pageContext={pageContext}>
-    <StyledWrapper>
-      <StyledContent>{children}</StyledContent>
-      <StyledButton>Usuń notatkę</StyledButton>
-      <StyledButton activeColor={pageContext}>
-        <StyledLink to={`/${pageContext}`}> close/SAVE</StyledLink>
-      </StyledButton>
-    </StyledWrapper>
-  </UserPageTemplate>
-);
+const DetailsTemplate = ({ children, pageContext }) => {
+  return (
+    <UserPageTemplate pageContext={pageContext}>
+      <StyledWrapper>
+        <StyledContent>{children}</StyledContent>
+      </StyledWrapper>
+    </UserPageTemplate>
+  );
+};
 
 export default DetailsTemplate;

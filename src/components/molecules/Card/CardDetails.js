@@ -2,9 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import Heading from "../../atoms/Heading/Heading";
-import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import withContext from "../../../hoc/withContext";
+import { Link } from "react-router-dom";
+import Button from "../../atoms/Button/Button";
+import { removeItem } from "../../../actions";
 
 const StyledWrapper = styled.div`
   width: 30vw;
@@ -47,9 +50,24 @@ const StyledParagraph = styled(Paragraph)`
   margin: 25px 0;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.black};
+  padding: 15px 58px;
+`;
+
+const StyledButton = styled(Button)`
+  margin-right: 20px;
+`;
+const StyledDiv = styled.div`
+  display: flex;
+  margin-top: 30px;
+`;
+
 const CardDetails = () => {
   const location = useLocation();
-
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [pageContext, id] = location.pathname.substr(1).split("/");
 
   const store = useSelector((s) => s);
@@ -60,27 +78,41 @@ const CardDetails = () => {
   //console.log("id == cardItem2.id : ", id == cardItem2.id);
   //console.log("id === cardItem2.id : ", id === cardItem2.id);
 
-  console.log(cardItem);
   const { title, created, twitterPhoto, articleUrl, content, twitterLink } = cardItem;
 
   return (
-    <StyledWrapper>
-      <StyledHeading>{title}</StyledHeading>
-      <StyledDate>Utworzono: {created}</StyledDate>
+    <>
+      <StyledWrapper>
+        <StyledHeading>{title}</StyledHeading>
+        <StyledDate>Utworzono: {created}</StyledDate>
 
-      {pageContext === "twitters" && <StyledAvatar src={twitterPhoto} />}
-      <StyledParagraph>{content}</StyledParagraph>
-      {pageContext === "articles" && (
-        <StyledA href={articleUrl} target="_blank">
-          Przejdź do artykułu
-        </StyledA>
-      )}
-      {pageContext === "twitters" && (
-        <StyledA href={twitterLink} target="_blank">
-          Przejdź do twitta
-        </StyledA>
-      )}
-    </StyledWrapper>
+        {pageContext === "twitters" && <StyledAvatar src={twitterPhoto} />}
+        <StyledParagraph>{content}</StyledParagraph>
+        {pageContext === "articles" && (
+          <StyledA href={articleUrl} target="_blank">
+            Przejdź do artykułu
+          </StyledA>
+        )}
+        {pageContext === "twitters" && (
+          <StyledA href={twitterLink} target="_blank">
+            Przejdź do twitta
+          </StyledA>
+        )}
+      </StyledWrapper>
+      <StyledDiv>
+        <StyledButton
+          onClick={() => {
+            history.push("/" + pageContext);
+            dispatch(removeItem(pageContext, id));
+          }}
+        >
+          Usuń notatkę
+        </StyledButton>
+        <StyledButton activeColor={pageContext}>
+          <StyledLink to={`/${pageContext}`}> close/SAVE</StyledLink>
+        </StyledButton>
+      </StyledDiv>
+    </>
   );
 };
 export default withContext(CardDetails);

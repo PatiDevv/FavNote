@@ -26,6 +26,7 @@ class DetailsPage extends Component {
 
   render() {
     const { pageContext } = this.state;
+
     return (
       <DetailsTemplate pageContext={pageContext}>
         <CardDetails></CardDetails>
