@@ -1,9 +1,11 @@
 import React from "react";
 import Input from "../atoms/Input/Input";
-import Button from "../atoms/Button/Button";
+import Button from "../../components/atoms/Button/Button";
 import Heading from "../atoms/Heading/Heading";
 import styled from "styled-components";
 import withContext from "../../hoc/withContext";
+import { connect } from "react-redux";
+import { addItem as addItemAction } from "../../actions/index";
 
 const StyledWrapper = styled.div`
   border-left: 10px solid ${({ activeColor, theme }) => theme[activeColor]};
@@ -35,20 +37,36 @@ const StyledInput = styled(Input)`
   margin-top: 30px;
 `;
 
-const NewItemBar = ({ pageContext, isVisible }) => (
-  <StyledWrapper isVisible={isVisible} activeColor={pageContext}>
-    <Heading big>
-      Utwórz
-      {pageContext === "notes" && " nową notatkę"}
-      {pageContext === "articles" && " nowy artykuł"}
-      {pageContext === "twitters" && " nowego twitta"}
-    </Heading>
+const NewItemBar = ({ pageContext, isVisible, addItem }) => {
+  return (
+    <StyledWrapper isVisible={isVisible} activeColor={pageContext}>
+      <Heading big>
+        Utwórz
+        {pageContext === "notes" && " nową notatkę"}
+        {pageContext === "articles" && " nowy artykuł"}
+        {pageContext === "twitters" && " nowego twitta"}
+      </Heading>
 
-    <StyledInput placeholder={pageContext === "twitters" ? "Nazwa konta np. hello_roman" : "Tytuł"}></StyledInput>
-    {pageContext === "articles" && <StyledInput placeholder="Link"></StyledInput>}
-    <SyledTextArea as="textarea" placeholder="Treść"></SyledTextArea>
-    <Button activeColor={pageContext}>Dodaj</Button>
-  </StyledWrapper>
-);
+      <StyledInput placeholder="Tytuł"></StyledInput>
+      {pageContext === "articles" && <StyledInput placeholder="Link"></StyledInput>}
+      <SyledTextArea as="textarea" placeholder="Treść"></SyledTextArea>
+      <Button
+        onClick={() => {
+          addItem(pageContext, {
+            title: "coś",
+            content: "cos cos cos",
+          });
+        }}
+        activeColor={pageContext}
+      >
+        Dodaj
+      </Button>
+    </StyledWrapper>
+  );
+};
 
-export default withContext(NewItemBar);
+const mapDispatchToProps = (dispatch) => ({
+  addItem: (itemType, itemContent) => dispatch(addItemAction(itemType, itemContent)),
+});
+
+export default connect(null, mapDispatchToProps)(withContext(NewItemBar));
