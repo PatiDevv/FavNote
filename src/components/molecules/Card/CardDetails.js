@@ -54,12 +54,13 @@ const CardDetails = () => {
 
   const store = useSelector((s) => s);
 
-  const cardItem = store[pageContext].find((item) => item.id === Number(id)); // albo parseInt()
+  const cardItem = store[pageContext].find((item) => item.id == id); // albo parseInt()
   //console.log("carditem: ", cardItem, " cardItem2: ", cardItem2);
   //console.log("id carditem2-u: ", cardItem2.id, " id z location: ", id);
   //console.log("id == cardItem2.id : ", id == cardItem2.id);
   //console.log("id === cardItem2.id : ", id === cardItem2.id);
 
+  console.log(cardItem);
   const { title, created, twitterPhoto, articleUrl, content, twitterLink } = cardItem;
 
   return (
