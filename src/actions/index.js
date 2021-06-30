@@ -19,7 +19,7 @@ export const authenticate = (username, password) => (dispatch) => {
       dispatch({ type: AUTH_SUCCESS, payload });
     })
     .catch((err) => {
-      console.log(err);
+      console.log("cos " + err);
       dispatch({ type: AUTH_FAILURE });
     });
 };
