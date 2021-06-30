@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import withContext from "../../../hoc/withContext";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../../actions";
 
 const StyledWrapper = styled.nav`
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.note)};
@@ -42,23 +44,27 @@ const StyledLogoutButton = styled(ButtonIcon)`
   margin-top: auto;
 `;
 
-const Sidebar = ({ pageContext }) => (
-  <StyledWrapper activeColor={pageContext}>
-    <StyledLogoLink to="/notes" />
-    <StyledLinksList>
-      <li>
-        <ButtonIcon as={NavLink} to="/notes" icon={ImageAssets.pen} activeclass="active" />
-      </li>
-      <li>
-        <ButtonIcon as={NavLink} to="/twitters" icon={ImageAssets.twitter} activeclass="active" />
-      </li>
-      <li>
-        <ButtonIcon as={NavLink} to="/articles" icon={ImageAssets.bulb} activeclass="active" />
-      </li>
-    </StyledLinksList>
-    <StyledLogoutButton as={NavLink} to="/login" icon={ImageAssets.logout} />
-  </StyledWrapper>
-);
+const Sidebar = ({ pageContext }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <StyledWrapper activeColor={pageContext}>
+      <StyledLogoLink to="/notes" />
+      <StyledLinksList>
+        <li>
+          <ButtonIcon as={NavLink} to="/notes" icon={ImageAssets.pen} activeclass="active" />
+        </li>
+        <li>
+          <ButtonIcon as={NavLink} to="/twitters" icon={ImageAssets.twitter} activeclass="active" />
+        </li>
+        <li>
+          <ButtonIcon as={NavLink} to="/articles" icon={ImageAssets.bulb} activeclass="active" />
+        </li>
+      </StyledLinksList>
+      <StyledLogoutButton onClick={() => dispatch(logOut())} to="/login" icon={ImageAssets.logout} />
+    </StyledWrapper>
+  );
+};
 
 Sidebar.propTypes = {
   PageContext: PropTypes.oneOf(["notes", "twitters", "articles"]),

@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import Heading from "../../atoms/Heading/Heading";
-import { useHistory, useLocation } from "react-router-dom";
+import { Redirect, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import withContext from "../../../hoc/withContext";
 import { Link } from "react-router-dom";
 import Button from "../../atoms/Button/Button";
 import { removeItem } from "../../../actions";
+import { routes } from "../../../routes";
 
 const StyledWrapper = styled.div`
   width: 30vw;
@@ -72,21 +73,25 @@ const CardDetails = () => {
   const store = useSelector((s) => s);
   const cardItem = store[pageContext].find((item) => item.id == id);
 
+  if (cardItem == null) {
+    return <Redirect to={routes.notfound} />;
+  }
+
   return (
     <>
       <StyledWrapper>
-        <StyledHeading>{cardItem?.title}</StyledHeading>
-        <StyledDate>Utworzono: {cardItem?.created}</StyledDate>
+        <StyledHeading>{cardItem.title}</StyledHeading>
+        <StyledDate>Utworzono: {cardItem.created}</StyledDate>
 
-        {pageContext === "twitters" && <StyledAvatar src={cardItem?.twitterPhoto} />}
-        <StyledParagraph>{cardItem?.content}</StyledParagraph>
+        {pageContext === "twitters" && <StyledAvatar src={cardItem.twitterPhoto} />}
+        <StyledParagraph>{cardItem.content}</StyledParagraph>
         {pageContext === "articles" && (
-          <StyledA href={cardItem?.articleUrl} target="_blank">
+          <StyledA href={cardItem.articleUrl} target="_blank">
             Przejdź do artykułu
           </StyledA>
         )}
         {pageContext === "twitters" && (
-          <StyledA href={cardItem?.twitterLink} target="_blank">
+          <StyledA href={cardItem.twitterLink} target="_blank">
             Przejdź do twitta
           </StyledA>
         )}

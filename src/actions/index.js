@@ -13,7 +13,6 @@ export const authenticate = (username, password) => (dispatch) => {
 };
 
 export const removeItem = (itemType, id) => {
-  localStorage.removeItem("userID");
   return {
     type: "REMOVE_ITEM",
     payload: {
@@ -24,6 +23,7 @@ export const removeItem = (itemType, id) => {
 };
 
 export const logOut = () => {
+  localStorage.removeItem("userID");
   return {
     type: "LOGOUT",
   };

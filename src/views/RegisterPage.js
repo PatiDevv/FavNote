@@ -7,6 +7,9 @@ import Input from "../components/atoms/Input/Input";
 import Button from "../components/atoms/Button/Button";
 import { Link } from "react-router-dom";
 import { routes } from "../routes/index";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticate as authenticateAction } from "../actions";
+import { Redirect } from "react-router-dom";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -30,29 +33,39 @@ const StyledLink = styled(Link)`
   margin: 20px 0 50px;
 `;
 
-const RegisterPage = () => (
-  <AuthTemplate>
-    <Formik
-      initialValues={{ username: "", password: "" }}
-      onSubmit={({ username, password }) => {
-        console.log("hello");
-      }}
-    >
-      {({ handleChange, handleBlur, values }) => (
-        <>
-          <Heading>Sign in</Heading>
-          <StyledForm>
-            <StyledInput type="text" name="username" placeholder="Login" onChange={handleChange} onBlur={handleBlur} value={values.title} />
-            <StyledInput type="password" name="password" placeholder="Password" onChange={handleChange} onBlur={handleBlur} value={values.title} />
-            <Button activeColor="notes" type="submit">
-              register
-            </Button>
-          </StyledForm>
-          <StyledLink to={routes.login}>I want to log in!</StyledLink>
-        </>
-      )}
-    </Formik>
-  </AuthTemplate>
-);
+const RegisterPage = () => {
+  const dispatch = useDispatch();
+  const userID = useSelector((s) => s.userID);
+
+  return (
+    <AuthTemplate>
+      <Formik
+        initialValues={{ username: "", password: "" }}
+        onSubmit={({ username, password }) => {
+          dispatch(authenticateAction(username, password));
+        }}
+      >
+        {({ handleChange, handleBlur, values }) => {
+          if (userID) {
+            return <Redirect to={routes.home} />;
+          }
+          return (
+            <>
+              <Heading>Sign up</Heading>
+              <StyledForm>
+                <StyledInput type="text" name="username" placeholder="Login" onChange={handleChange} onBlur={handleBlur} value={values.title} />
+                <StyledInput type="password" name="password" placeholder="Password" onChange={handleChange} onBlur={handleBlur} value={values.title} />
+                <Button activeColor="notes" type="submit">
+                  register
+                </Button>
+              </StyledForm>
+              <StyledLink to={routes.login}>I want to log in!</StyledLink>
+            </>
+          );
+        }}
+      </Formik>
+    </AuthTemplate>
+  );
+};
 
 export default RegisterPage;

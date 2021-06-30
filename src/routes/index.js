@@ -8,4 +8,5 @@ export const routes = {
   article: "/articles/:id",
   login: "/login",
   register: "/register",
+  notfound: "/not-found",
 };

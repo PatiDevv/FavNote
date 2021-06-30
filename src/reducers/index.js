@@ -1,4 +1,9 @@
+import { ADD_ITEM, REMOVE_ITEM, AUTH_SUCCESS, LOGOUT } from "../actions/index";
+
+const userID = localStorage.getItem("userID");
+
 const initialState = {
+  userID: userID || null,
   twitters: [
     {
       id: 1,
@@ -139,15 +144,30 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "REMOVE_ITEM":
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        userID: action.payload.data._id,
+      };
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        userID: action.payload.data._id,
+      };
+    case REMOVE_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType].filter((item) => item.id != action.payload.id)],
       };
-    case "ADD_ITEM":
+    case ADD_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType], action.payload.item],
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        userID: null,
       };
     default:
       return state;
