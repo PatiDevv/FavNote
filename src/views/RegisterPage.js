@@ -44,7 +44,7 @@ const RegisterPage = () => (
           <StyledForm>
             <StyledInput type="text" name="username" placeholder="Login" onChange={handleChange} onBlur={handleBlur} value={values.title} />
             <StyledInput type="password" name="password" placeholder="Password" onChange={handleChange} onBlur={handleBlur} value={values.title} />
-            <Button activecolor="notes" type="submit">
+            <Button activeColor="notes" type="submit">
               register
             </Button>
           </StyledForm>
