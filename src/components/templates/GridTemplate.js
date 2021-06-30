@@ -79,7 +79,7 @@ class GridTemplate extends Component {
               {pageContext === "twitters" && "Twitters"}
             </StyledHeading>
             <StyledParagraph>
-              6 {pageContext === "notes" && "notatek"}
+              {this.props?.count} {pageContext === "notes" && "notatek"}
               {pageContext === "articles" && "artykułów"}
               {pageContext === "twitters" && "twittów"}
             </StyledParagraph>

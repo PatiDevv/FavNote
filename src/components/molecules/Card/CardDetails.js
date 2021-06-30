@@ -69,32 +69,24 @@ const CardDetails = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [pageContext, id] = location.pathname.substr(1).split("/");
-
   const store = useSelector((s) => s);
-
-  const cardItem = store[pageContext].find((item) => item.id == id); // albo parseInt()
-  //console.log("carditem: ", cardItem, " cardItem2: ", cardItem2);
-  //console.log("id carditem2-u: ", cardItem2.id, " id z location: ", id);
-  //console.log("id == cardItem2.id : ", id == cardItem2.id);
-  //console.log("id === cardItem2.id : ", id === cardItem2.id);
-
-  const { title, created, twitterPhoto, articleUrl, content, twitterLink } = cardItem;
+  const cardItem = store[pageContext].find((item) => item.id == id);
 
   return (
     <>
       <StyledWrapper>
-        <StyledHeading>{title}</StyledHeading>
-        <StyledDate>Utworzono: {created}</StyledDate>
+        <StyledHeading>{cardItem?.title}</StyledHeading>
+        <StyledDate>Utworzono: {cardItem?.created}</StyledDate>
 
-        {pageContext === "twitters" && <StyledAvatar src={twitterPhoto} />}
-        <StyledParagraph>{content}</StyledParagraph>
+        {pageContext === "twitters" && <StyledAvatar src={cardItem?.twitterPhoto} />}
+        <StyledParagraph>{cardItem?.content}</StyledParagraph>
         {pageContext === "articles" && (
-          <StyledA href={articleUrl} target="_blank">
+          <StyledA href={cardItem?.articleUrl} target="_blank">
             Przejdź do artykułu
           </StyledA>
         )}
         {pageContext === "twitters" && (
-          <StyledA href={twitterLink} target="_blank">
+          <StyledA href={cardItem?.twitterLink} target="_blank">
             Przejdź do twitta
           </StyledA>
         )}

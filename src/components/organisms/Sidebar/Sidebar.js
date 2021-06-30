@@ -44,7 +44,7 @@ const StyledLogoutButton = styled(ButtonIcon)`
 
 const Sidebar = ({ pageContext }) => (
   <StyledWrapper activeColor={pageContext}>
-    <StyledLogoLink to="/" />
+    <StyledLogoLink to="/notes" />
     <StyledLinksList>
       <li>
         <ButtonIcon as={NavLink} to="/notes" icon={ImageAssets.pen} activeclass="active" />

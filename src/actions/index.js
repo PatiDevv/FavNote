@@ -1,36 +1,31 @@
-import axios from "axios";
-
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const ADD_ITEM = "ADD_ITEM";
 export const AUTH_REQUEST = "AUTH_REQUEST";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
-export const AUTH_FAILURE = "AUTH_FAILURE";
+export const LOGOUT = "LOGOUT";
 
 export const authenticate = (username, password) => (dispatch) => {
   dispatch({ type: AUTH_REQUEST });
-
-  return axios
-    .post("http://localhost:9000/api/user/login", {
-      username,
-      password,
-    })
-    .then((payload) => {
-      console.log(payload);
-      dispatch({ type: AUTH_SUCCESS, payload });
-    })
-    .catch((err) => {
-      console.log("cos " + err);
-      dispatch({ type: AUTH_FAILURE });
-    });
+  localStorage.setItem("userID", username);
+  setTimeout(() => {
+    dispatch({ type: AUTH_SUCCESS, payload: { data: { _id: "1234" } } });
+  }, 1000);
 };
 
 export const removeItem = (itemType, id) => {
+  localStorage.removeItem("userID");
   return {
     type: "REMOVE_ITEM",
     payload: {
       itemType,
       id,
     },
+  };
+};
+
+export const logOut = () => {
+  return {
+    type: "LOGOUT",
   };
 };
 

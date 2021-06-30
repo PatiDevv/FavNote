@@ -1,19 +1,18 @@
 import React from "react";
-import { connect } from "react-redux";
 import GridTemplate from "../components/templates/GridTemplate";
 import Card from "../components/molecules/Card/Card";
+import { useSelector } from "react-redux";
 
-const Notes = ({ notes }) => (
-  <GridTemplate pageContext="notes">
-    {notes.map((item) => (
-      <Card id={item.id} cardType="notes" title={item.title} content={item.content} created={item.created} key={item.id} />
-    ))}
-  </GridTemplate>
-);
+const Notes = () => {
+  const notes = useSelector((s) => s.notes);
 
-const mapStateToProps = (state) => {
-  const { notes } = state;
-  return { notes };
+  return (
+    <GridTemplate count={notes.length} pageContext="notes">
+      {notes.map((item) => (
+        <Card id={item.id} cardType="notes" title={item.title} content={item.content} created={item.created} key={item.id} />
+      ))}
+    </GridTemplate>
+  );
 };
 
-export default connect(mapStateToProps)(Notes);
+export default Notes;

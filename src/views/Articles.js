@@ -4,7 +4,7 @@ import GridTemplate from "../components/templates/GridTemplate";
 import Card from "../components/molecules/Card/Card";
 
 const Articles = ({ articles }) => (
-  <GridTemplate pageContext="articles">
+  <GridTemplate count={articles.length} pageContext="articles">
     {articles.map((item) => (
       <Card cardType="articles" id={item.id} title={item.title} content={item.content} articleUrl={item.articleUrl} created={item.created} key={item.id} />
     ))}
