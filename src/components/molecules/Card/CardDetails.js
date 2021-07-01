@@ -72,7 +72,7 @@ const CardDetails = () => {
   const [pageContext, id] = location.pathname.substr(1).split("/");
   const store = useSelector((s) => s);
   const cardItem = store[pageContext].find((item) => item.id == id);
-
+  console.log("reomoveItem", removeItem);
   if (cardItem == null) {
     return <Redirect to={routes.notfound} />;
   }
@@ -103,7 +103,7 @@ const CardDetails = () => {
             dispatch(removeItem(pageContext, id));
           }}
         >
-          Usuń notatkę
+          Remove notes
         </StyledButton>
         <StyledButton activeColor={pageContext}>
           <StyledLink to={`/${pageContext}`}> close/SAVE</StyledLink>

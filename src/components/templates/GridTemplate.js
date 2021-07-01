@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "../atoms/Input/Input";
 import Heading from "../atoms/Heading/Heading";
@@ -55,50 +54,30 @@ const StyledButtonIcon = styled(ButtonIcon)`
   z-index: 10000;
 `;
 
-class GridTemplate extends Component {
-  state = {
-    isNewItemBarVisible: false,
-  };
+const GridTemplate = ({ children, pageContext, count }) => {
+  const [isNewItemBarVisible, setIsNewItemBarVisible] = useState(false);
 
-  toggleNewItemBar = () => {
-    this.setState((prevState) => ({
-      isNewItemBarVisible: !prevState.isNewItemBarVisible,
-    }));
-  };
+  const toggleNewItemBar = () => setIsNewItemBarVisible(!isNewItemBarVisible);
 
-  render() {
-    const { children, pageContext } = this.props;
-    const { isNewItemBarVisible } = this.state;
-
-    return (
-      <UserPageTemplate>
-        <StyledWrapper>
-          <StyledPageHeader>
-            <Input search placeholder="search"></Input>
-            <StyledHeading big as="h1">
-              {pageContext}
-            </StyledHeading>
-            <StyledParagraph>
-              {this.props?.count} {pageContext}
-            </StyledParagraph>
-            <UserBar></UserBar>
-          </StyledPageHeader>
-          <StyledGrid>{children}</StyledGrid>
-          <StyledButtonIcon onClick={this.toggleNewItemBar} icon={PlusIcon} activeColor={pageContext}></StyledButtonIcon>
-          <NewItemBar handleClose={this.toggleNewItemBar} isVisible={isNewItemBarVisible} />
-        </StyledWrapper>
-      </UserPageTemplate>
-    );
-  }
-}
-
-GridTemplate.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  PageContext: PropTypes.oneOf(["notes", "twitters", "articles"]),
-};
-
-GridTemplate.defaultProps = {
-  PageContext: "notes",
+  return (
+    <UserPageTemplate>
+      <StyledWrapper>
+        <StyledPageHeader>
+          <Input search placeholder="search"></Input>
+          <StyledHeading big as="h1">
+            {pageContext}
+          </StyledHeading>
+          <StyledParagraph>
+            {count} {pageContext}
+          </StyledParagraph>
+          <UserBar></UserBar>
+        </StyledPageHeader>
+        <StyledGrid>{children}</StyledGrid>
+        <StyledButtonIcon onClick={toggleNewItemBar} icon={PlusIcon} activeColor={pageContext}></StyledButtonIcon>
+        <NewItemBar handleClose={toggleNewItemBar} isVisible={isNewItemBarVisible} />
+      </StyledWrapper>
+    </UserPageTemplate>
+  );
 };
 
 export default withContext(GridTemplate);

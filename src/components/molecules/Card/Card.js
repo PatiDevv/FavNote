@@ -1,13 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 import Heading from "../../atoms/Heading/Heading";
 import Button from "../../atoms/Button/Button";
 import LinkIcon from "../../../assets/link.svg";
-import { connect } from "react-redux";
-import { removeItem as removeItemAction } from "../../../actions/index";
+import { removeItem } from "../../../actions/index";
 import withContext from "../../../hoc/withContext";
 
 const StyledWrapper = styled.div`
@@ -73,58 +72,32 @@ const StyledLinkButton = styled.a`
   transform: translateY(-10%);
 `;
 
-class Card extends Component {
-  state = {
-    redirect: false,
-  };
-
-  handleCardClik = () => this.setState({ redirect: true });
-
-  render() {
-    const { id, pageContext, title, created, twitterPhoto, articleUrl, content, removeItem } = this.props;
-
-    if (this.state.redirect) {
-      return <Redirect to={`${pageContext}/${id}`} />;
-    }
-
-    return (
-      <StyledWrapper onClick={this.handleCardClik}>
-        <InnerWrapper activeColor={pageContext}>
-          <StyledHeading>{title}</StyledHeading>
-          <DateInfo>{created}</DateInfo>
-
-          {pageContext === "twitters" && <StyledAvatar src={twitterPhoto} />}
-          {pageContext === "articles" && <StyledLinkButton href={articleUrl} />}
-        </InnerWrapper>
-
-        <InnerWrapper flex>
-          <Paragraph> {content} </Paragraph>
-          <Button secondary onClick={() => removeItem(pageContext, id)}>
-            Usuń
-          </Button>
-        </InnerWrapper>
-      </StyledWrapper>
-    );
+const Card = ({ id, pageContext, title, created, twitterPhoto, articleUrl, content }) => {
+  const dispatch = useDispatch();
+  const [redirect, setRedirect] = useState(false);
+  const handleCardClik = () => setRedirect(true);
+  if (redirect) {
+    return <Redirect to={`${pageContext}/${id}`} />;
   }
-}
 
-Card.propTypes = {
-  pageContext: PropTypes.oneOf(["notes", "twitters", "articles"]),
-  title: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
-  twitterPhoto: PropTypes.string,
-  articleUrl: PropTypes.string,
-  content: PropTypes.string.isRequired,
+  return (
+    <StyledWrapper onClick={handleCardClik}>
+      <InnerWrapper activeColor={pageContext}>
+        <StyledHeading>{title}</StyledHeading>
+        <DateInfo>{created}</DateInfo>
+
+        {pageContext === "twitters" && <StyledAvatar src={twitterPhoto} />}
+        {pageContext === "articles" && <StyledLinkButton href={articleUrl} />}
+      </InnerWrapper>
+
+      <InnerWrapper flex>
+        <Paragraph> {content} </Paragraph>
+        <Button secondary onClick={() => dispatch(removeItem(pageContext, id))}>
+          Remove
+        </Button>
+      </InnerWrapper>
+    </StyledWrapper>
+  );
 };
 
-Card.defaultProps = {
-  pageContext: "notes",
-  twitterPhoto: null,
-  articleUrl: null,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
-});
-
-export default connect(null, mapDispatchToProps)(withContext(Card));
+export default withContext(Card);
