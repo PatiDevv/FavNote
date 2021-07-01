@@ -1,8 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 import Input from "../atoms/Input/Input";
 import Button from "../../components/atoms/Button/Button";
 import Heading from "../atoms/Heading/Heading";
-import styled from "styled-components";
 import withContext from "../../hoc/withContext";
 import { connect } from "react-redux";
 import { addItem as addItemAction } from "../../actions/index";

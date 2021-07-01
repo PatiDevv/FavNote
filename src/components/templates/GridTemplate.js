@@ -9,6 +9,7 @@ import withContext from "../../hoc/withContext";
 import ButtonIcon from "../atoms/ButtonIcon/ButtonIcon";
 import PlusIcon from "../../assets/icons/plus.svg";
 import NewItemBar from "../../components/organisms/NewItemBar";
+import UserBar from "../organisms/Sidebar/Userbar";
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -36,6 +37,7 @@ const StyledPageHeader = styled.div`
 
 const StyledHeading = styled(Heading)`
   margin: 25px 0 0 0;
+  text-transform: capitalize;
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -74,15 +76,12 @@ class GridTemplate extends Component {
           <StyledPageHeader>
             <Input search placeholder="search"></Input>
             <StyledHeading big as="h1">
-              {pageContext === "notes" && "Notatki"}
-              {pageContext === "articles" && "Artykuły"}
-              {pageContext === "twitters" && "Twitters"}
+              {pageContext}
             </StyledHeading>
             <StyledParagraph>
-              {this.props?.count} {pageContext === "notes" && "notatek"}
-              {pageContext === "articles" && "artykułów"}
-              {pageContext === "twitters" && "twittów"}
+              {this.props?.count} {pageContext}
             </StyledParagraph>
+            <UserBar></UserBar>
           </StyledPageHeader>
           <StyledGrid>{children}</StyledGrid>
           <StyledButtonIcon onClick={this.toggleNewItemBar} icon={PlusIcon} activeColor={pageContext}></StyledButtonIcon>
