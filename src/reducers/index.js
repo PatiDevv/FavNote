@@ -149,12 +149,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userID: action.payload.data._id,
       };
-    case AUTH_SUCCESS:
-      return {
-        ...state,
-        userID: action.payload.data._id,
-      };
-    case REMOVE_ITEM:
+        case REMOVE_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType].filter((item) => item.id != action.payload.id)],

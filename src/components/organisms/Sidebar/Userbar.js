@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import withContext from "../../../hoc/withContext";
-import authenticate from "../../../actions/index";
 
 const StyledWrapper = styled.div`
   height: 15vh;

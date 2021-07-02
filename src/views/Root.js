@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Redirect, useLocation } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { Provider, useSelector } from "react-redux";
 import MainTemplate from "../components/templates/MainTemplate";
 import Articles from "./Articles";

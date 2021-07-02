@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
