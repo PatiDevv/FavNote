@@ -1,9 +1,10 @@
-import { ADD_ITEM, REMOVE_ITEM, AUTH_SUCCESS, LOGOUT } from "../actions/index";
+import { ADD_ITEM, REMOVE_ITEM, AUTH_SUCCESS, LOGOUT, SEARCH } from "../actions/index";
 
 const userID = localStorage.getItem("userID");
 
-const initialState = {
+export const initialState = {
   userID: userID || null,
+  search: "",
   twitters: [
     {
       id: 1,
@@ -143,13 +144,15 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
+  console.log("reducer: ", action);
+
   switch (action.type) {
     case AUTH_SUCCESS:
       return {
         ...state,
         userID: action.payload.data._id,
       };
-        case REMOVE_ITEM:
+    case REMOVE_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType].filter((item) => item.id != action.payload.id)],
@@ -164,6 +167,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userID: null,
       };
+    case SEARCH: {
+      console.log("reducer akcja search", action);
+
+      return {
+        ...state,
+        search: action.search,
+      };
+    }
     default:
       return state;
   }

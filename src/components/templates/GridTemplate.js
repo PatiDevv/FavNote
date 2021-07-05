@@ -9,6 +9,8 @@ import ButtonIcon from "../atoms/ButtonIcon/ButtonIcon";
 import PlusIcon from "../../assets/icons/plus.svg";
 import NewItemBar from "../../components/organisms/NewItemBar";
 import UserBar from "../organisms/Sidebar/Userbar";
+import { globalSearch } from "../../actions/index";
+import { useDispatch } from "react-redux";
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -57,13 +59,15 @@ const StyledButtonIcon = styled(ButtonIcon)`
 const GridTemplate = ({ children, pageContext, count }) => {
   const [isNewItemBarVisible, setIsNewItemBarVisible] = useState(false);
 
+  const dispatch = useDispatch();
+
   const toggleNewItemBar = () => setIsNewItemBarVisible(!isNewItemBarVisible);
 
   return (
     <UserPageTemplate>
       <StyledWrapper>
         <StyledPageHeader>
-          <Input search placeholder="search"></Input>
+          <Input search placeholder="search" onChange={(e) => dispatch(globalSearch(e.target.value))}></Input>
           <StyledHeading big as="h1">
             {pageContext}
           </StyledHeading>
