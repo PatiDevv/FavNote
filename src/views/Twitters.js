@@ -1,11 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
 import GridTemplate from "../components/templates/GridTemplate";
 import Card from "../components/molecules/Card/Card";
 import { filterCardsByTitle } from "../helpers/FilterByTitle";
+import { globalSearch } from "../actions";
 
 const Twitters = ({ twitters, search }) => {
-  console.log("updateSearch", search);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(globalSearch(""));
+  }, []);
+
   return (
     <GridTemplate count={twitters.length} pageContext="twitters">
       {filterCardsByTitle(twitters, search).map((item) => (
