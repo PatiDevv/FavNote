@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import GridTemplate from "../components/templates/GridTemplate";
 import Card from "../components/molecules/Card/Card";

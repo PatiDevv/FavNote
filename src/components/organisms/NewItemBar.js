@@ -47,12 +47,7 @@ const StyledForm = styled(Form)`
 const NewItemBar = ({ pageContext, isVisible, addItem, handleClose }) => {
   return (
     <StyledWrapper isVisible={isVisible} activeColor={pageContext}>
-      <Heading big>
-        Utwórz
-        {pageContext === "notes" && " nową notatkę"}
-        {pageContext === "articles" && " nowy artykuł"}
-        {pageContext === "twitters" && " nowego twitta"}
-      </Heading>
+      <Heading big>Add {pageContext}</Heading>
       <Formik
         initialValues={{ title: "", content: "", twitterLink: "", created: "", twitterPhoto: "", articleUrl: "" }}
         onSubmit={(values) => {
@@ -62,14 +57,14 @@ const NewItemBar = ({ pageContext, isVisible, addItem, handleClose }) => {
       >
         {() => (
           <StyledForm>
-            <Field as={StyledInput} type="title" name="title" placeholder="Tytuł" />
+            <Field as={StyledInput} type="title" name="title" placeholder="title" />
             {pageContext === "articles" && <Field as={StyledInput} type="articleUrl" name="articleUrl" placeholder="Link" />}
-            {pageContext === "twitters" && <Field as={StyledInput} type="twitterLink" name="twitterLink" placeholder="Link do twitta" />}
-            {pageContext === "twitters" && <Field as={StyledInput} type="twitterPhoto" name="twitterPhoto" placeholder="Link do zdjęcia twitta" />}
-            <Field as={SyledTextArea} type="content" name="content" placeholder="Treść" />
+            {pageContext === "twitters" && <Field as={StyledInput} type="twitterLink" name="twitterLink" placeholder="link to the twitter" />}
+            {pageContext === "twitters" && <Field as={StyledInput} type="twitterPhoto" name="twitterPhoto" placeholder="link to the photo of the twitter" />}
+            <Field as={SyledTextArea} type="content" name="content" placeholder="content" />
 
             <Button type="submit" activeColor={pageContext}>
-              Dodaj
+              Add
             </Button>
           </StyledForm>
         )}

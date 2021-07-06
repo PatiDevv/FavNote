@@ -72,7 +72,6 @@ const CardDetails = () => {
   const [pageContext, id] = location.pathname.substr(1).split("/");
   const store = useSelector((s) => s);
   const cardItem = store[pageContext].find((item) => item.id == id);
-  console.log("reomoveItem", removeItem);
   if (cardItem == null) {
     return <Redirect to={routes.notfound} />;
   }
